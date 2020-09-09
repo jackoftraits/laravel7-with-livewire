@@ -75,18 +75,20 @@
         </nav>
 
         <main class="py-4">
-            <div class="notify"></div>
+            <div class="notify " ></div>
             @yield('content')
         </main>
         @livewireScripts
         <script>
             window.addEventListener('closeModal', event => {
                 $("#modalForm").modal('hide');
-                
+
                 $(".notify").notify("Successfully Saved the Post!", {
+                    style: 'bootstrap',
                     elementPosition: 'top right',
                     autoHideDelay: 5000,
                     showAnimation: 'slideDown',
+                    className: 'success',
                 });
             })
 
