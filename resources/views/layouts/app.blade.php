@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/notify.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -74,12 +75,19 @@
         </nav>
 
         <main class="py-4">
+            <div class="notify"></div>
             @yield('content')
         </main>
         @livewireScripts
         <script>
             window.addEventListener('closeModal', event => {
                 $("#modalForm").modal('hide');
+                
+                $(".notify").notify("Successfully Saved the Post!", {
+                    elementPosition: 'top right',
+                    autoHideDelay: 5000,
+                    showAnimation: 'slideDown',
+                });
             })
 
             window.addEventListener('openModal', event => {
