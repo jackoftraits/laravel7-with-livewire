@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="modal fade" id="modalFormDelete" tabindex="-1" aria-labelledby="modalFormDeletePost" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

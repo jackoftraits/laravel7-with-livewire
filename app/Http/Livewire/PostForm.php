@@ -12,7 +12,8 @@ class PostForm extends Component
     public $modelId;
 
     protected $listeners = [
-        'getModelId'
+        'getModelId',
+        'forcedCloseModal'
     ];
 
     public function getModelId($modelId)
@@ -47,6 +48,16 @@ class PostForm extends Component
         $this->emit('refreshParent');
         $this->dispatchBrowserEvent('closeModal');
         $this->cleanVars();
+    }
+
+    public function forcedCloseModal()
+    {
+        // This is to reset our public variables
+        $this->cleanVars();
+
+        // These will reset our error bags
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     private function cleanVars()

@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @livewireStyles
 </head>
 <body>
@@ -80,16 +81,9 @@
         </main>
         @livewireScripts
         <script>
+           
             window.addEventListener('closeModal', event => {
-                $("#modalForm").modal('hide');
-
-                $(".notify").notify("Successfully Saved the Post!", {
-                    style: 'bootstrap',
-                    elementPosition: 'top right',
-                    autoHideDelay: 5000,
-                    showAnimation: 'slideDown',
-                    className: 'success',
-                });
+                $("#modalForm").modal('hide');                
             })
 
             window.addEventListener('openModal', event => {
@@ -102,7 +96,14 @@
 
             window.addEventListener('closeDeleteModal', event => {
                 $("#modalFormDelete").modal('hide');
-            })
+            })   
+            
+            $(document).ready(function(){        
+                // This event is triggered when the modal is hidden       
+                $("#modalForm").on('hidden.bs.modal', function(){
+                    livewire.emit('forcedCloseModal');
+                });
+            });            
 
         </script>
     </div>
