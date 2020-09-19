@@ -3,13 +3,17 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Post;
 
 class PostForm extends Component
 {
+    use WithFileUploads;
+
     public $title;
     public $content;
     public $modelId;
+    public $featuredImage;
 
     protected $listeners = [
         'getModelId',
@@ -30,14 +34,20 @@ class PostForm extends Component
     {
         $this->validate([
             'title' => 'required|min:10|max:20',
-            'content' => 'required'
+            'content' => 'required',
+            'featuredImage' => 'image' // Validates jpeg, png, gif and other image format
         ]);
 
         $data = [
             'title' => $this->title,
             'content' => $this->content,
             'user_id' => auth()->user()->id,
+            'featured_image' => $this->featuredImage->hashName()
         ];
+        
+        if (!empty($this->featuredImage)) {
+            $this->featuredImage->store('public/photos');
+        }
 
         if ($this->modelId) {
             Post::find($this->modelId)->update($data);
