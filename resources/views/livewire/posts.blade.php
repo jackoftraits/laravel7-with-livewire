@@ -55,7 +55,7 @@
                         <tr>
                             <td>
                                 @if (!empty($item->featured_image))
-                                    <img width="100px" src="{{ url('storage/photos/'. $item->featured_image) }}" />
+                                    <img width="100px" src="{{ url('storage/photos_thumb/'. $item->featured_image) }}" />
                                 @else
                                     No featured image available!
                                 @endif
