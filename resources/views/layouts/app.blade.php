@@ -96,7 +96,12 @@
 
             window.addEventListener('closeDeleteModal', event => {
                 $("#modalFormDelete").modal('hide');
-            })   
+            })  
+
+            // Opens the show photos modal
+            window.addEventListener('openModalShowPhotos', event => {
+                $("#modalShowPhotos").modal('show');
+            })
             
             $(document).ready(function(){        
                 // This event is triggered when the modal is hidden       

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Post;
+use App\AdditionalPhotos;
 use Intervention\Image\ImageManager;
 
 class PostForm extends Component
@@ -15,6 +16,7 @@ class PostForm extends Component
     public $content;
     public $modelId;
     public $featuredImage;
+    public $additionalPhotos;
 
     protected $listeners = [
         'getModelId',
@@ -68,12 +70,34 @@ class PostForm extends Component
             $image->save('storage/photos_thumb/'.$imageHashName);
         }
 
+        // Validation for the additional photos
+        if (!empty($this->additionalPhotos)) {
+            $validateData = array_merge($validateData, [
+                'additionalPhotos.*' => 'image'
+            ]);
+        }
+
         $this->validate($validateData);
 
         if ($this->modelId) {
             Post::find($this->modelId)->update($data);
+            $postInstanceId = $this->modelId;
         } else {            
-            Post::create($data);
+            $postInstance = Post::create($data);
+            $postInstanceId = $postInstance->id;
+        }
+
+        // Uploads the images
+        if (!empty($this->additionalPhotos)) {
+            foreach ($this->additionalPhotos as $photo) {
+                $photo->store('public/additional_photos');
+
+                // Save the filename in the additional_photos table
+                AdditionalPhotos::create([
+                    'post_id' => $postInstanceId,
+                    'filename' => $photo->hashName()
+                ]);
+            }
         }
 
         $this->emit('refreshParent');
@@ -97,6 +121,7 @@ class PostForm extends Component
         $this->title = null;
         $this->content = null;
         $this->featuredImage = null;
+        $this->additionalPhotos = null;
     }
 
     public function render()

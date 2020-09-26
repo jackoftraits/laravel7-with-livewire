@@ -2,6 +2,11 @@
     <label>Featured Image</label><br/>
     <input type="file" wire:model="featuredImage" />
     <br/><br/>
+
+    <label>Photos</label><br/>
+    <input type="file" wire:model="additionalPhotos" multiple />
+    <br/><br/>
+
     <label>Title</label>
     <input wire:model="title" type="text" class="form-control"/>
     @if ($errors->has('title'))

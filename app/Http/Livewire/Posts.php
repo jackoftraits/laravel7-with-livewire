@@ -24,7 +24,14 @@ class Posts extends Component
         if ($action == 'delete') {
             // This will show the modal on the frontend
             $this->dispatchBrowserEvent('openDeleteModal');
-        } else {
+        } elseif ($action == 'showPhotos') {
+            // Pass the currently selected item
+            $this->emit('getPostId', $this->selectedItem);
+
+            // Show the modal that shows the additional photos
+            $this->dispatchBrowserEvent('openModalShowPhotos');
+        }
+        else {
             $this->emit('getModelId', $this->selectedItem);
             $this->dispatchBrowserEvent('openModal');
         }
