@@ -20,4 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/posts', 'HomeController@index')->name('posts');
 Route::get('/profile', 'ShowProfile')->name('profile-settings');
+Route::get('/post-list', 'PostList')->name('post-list');
