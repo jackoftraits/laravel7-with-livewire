@@ -9,7 +9,6 @@ use App\Post;
 class PostDatatable extends Component
 {
     use WithPagination;
-    public $headers;
     public $searchTerm;
     public $sortColumn = 'created_at';
     public $sortDirection = 'asc';
@@ -36,17 +35,7 @@ class PostDatatable extends Component
                 }
             ]
         ];
-    }
-
-    public function mount()
-    {
-        $this->headers = $this->headerConfig();
-    }
-
-    public function hydrate()
-    {
-        $this->headers = $this->headerConfig();
-    }
+    }   
 
     public function sort($column)
     {
@@ -71,7 +60,8 @@ class PostDatatable extends Component
     public function render()
     {
         return view('livewire.post-datatable', [
-            'data' => $this->resultData()
+            'data' => $this->resultData(),
+            'headers' => $this->headerConfig()
         ]);
     }
 }
