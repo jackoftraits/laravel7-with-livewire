@@ -1,4 +1,4 @@
-# laravelLivewire #laravel7 #livewire
+# laravel Livewire
 
 https://www.youtube.com/watch?v=4muQp-nB0ZQ&list=PLSP81gW0XjNFP8RTBLMb1KL7Qbr8hUjr4
 
