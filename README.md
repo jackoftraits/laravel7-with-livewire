@@ -23,7 +23,7 @@ with
 DB_CONNECTION=sqlite
 ```
 
-- php artisan migrate
+- php artisan migrate:fresh --seed
 - php artisan serve
 - php artisan storage:link
 - open browser on http://127.0.0.1:8000
