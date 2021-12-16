@@ -63,6 +63,7 @@ class PostForm extends Component
             
             // Upload the main image
             $this->featuredImage->store('public/photos');
+            Storage::makeDirectory('public/photos_thumb');
 
             // Create a thumbnail of the image using Intervention Image Library
             $manager = new ImageManager();
